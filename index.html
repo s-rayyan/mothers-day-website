@@ -86,6 +86,25 @@
                 opacity: 1;
             }
         }
+
+        .bouncy {
+            display: inline-block;
+            animation: bounce 0.6s ease forwards;
+        }
+
+        @keyframes bounce {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 
@@ -125,7 +144,7 @@
         <div class="hero">
             <h1>Is that enough?</h1>
             <p>Well that's it! Happy Mother's Day!</p>
-            <i>From Rayyan and Azhan</i>
+            <i id="author">From Rayyan and Azhan</i>
         </div>
     </div>
 
@@ -165,6 +184,14 @@
                                             setTimeout(() => $("#reason").fadeIn(), 1000);
                                             setTimeout(() => {
                                                 $("#page-5").slideUp(1000);
+                                                setTimeout(() => {
+                                                    const el = document.getElementById("author");
+                                                    el.innerHTML = el.textContent.split('').map((letter, i) =>
+                                                        `<span class="bouncy" style="animation-delay:${i * 0.1}s">${letter.replace(" ", "&nbsp;")}</span>`
+                                                    ).join('');
+                                                }, 1000);
+
+
                                             }, 3000);
                                         }, 3000);
                                     }
