@@ -114,8 +114,14 @@
     <div class="content bg-dark" id="page-4">
         <div class="hero d-flex flex-wrap" id="flower-parent"></div>
     </div>
-
     <div class="content" id="page-5">
+        <div class="hero">
+            <h1>Reasons You're the Best Mom</h1>
+            <p id="reason">You're my only mom</p>
+        </div>
+    </div>
+
+    <div class="content" id="page-6">
         <div class="hero">
             <h1>Is that enough?</h1>
             <p>Well that's it! Happy Mother's Day!</p>
@@ -155,6 +161,11 @@
                                         setTimeout(() => {
                                             $("#page-5").show();
                                             $("#page-4").slideUp(1000);
+                                            $("#reason").hide();
+                                            setTimeout(() => $("#reason").fadeIn(), 1000);
+                                            setTimeout(() => {
+                                                $("#page-5").slideUp(1000);
+                                            }, 3000);
                                         }, 3000);
                                     }
                                     u++;
