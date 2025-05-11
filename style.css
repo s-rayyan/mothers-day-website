@@ -1,0 +1,98 @@
+ body {
+     font-family: 'Segoe UI', sans-serif;
+ }
+
+ #loader {
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100vw;
+     height: 100vh;
+     background-color: #f8f9fa;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     z-index: 9999;
+ }
+
+ .content {
+     transition: opacity 0.5s ease-in;
+ }
+
+ #page-1.show {
+     opacity: 1;
+ }
+
+ #page-1 {
+     opacity: 0;
+ }
+
+ #page-1 .hero,
+ #page-3 .hero,
+ #page-5 .hero {
+     background: linear-gradient(to right, #e3f2fd, #fce4ec);
+ }
+
+ .hero {
+     height: 100vh;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     text-align: center;
+ }
+
+ .hero h1 {
+     font-size: 3rem;
+     font-weight: bold;
+     margin-bottom: 1rem;
+ }
+
+ .hero p {
+     font-size: 1.2rem;
+     color: #555;
+     max-width: 600px;
+ }
+
+ .flower {
+     position: absolute;
+     top: 0;
+     animation: flowerFall 2s ease-in forwards;
+     width: 50px;
+     height: 50px;
+ }
+
+ @keyframes flowerFall {
+     0% {
+         transform: translateY(0);
+         opacity: 1;
+     }
+
+     50% {
+         transform: translateY(-200px);
+     }
+
+     100% {
+         transform: translateY(110vh);
+         opacity: 1;
+     }
+ }
+
+ .bouncy {
+     display: inline-block;
+     animation: bounce 0.6s ease forwards;
+ }
+
+ @keyframes bounce {
+     0% {
+         transform: translateY(0);
+     }
+
+     50% {
+         transform: translateY(-15px);
+     }
+
+     100% {
+         transform: translateY(0);
+     }
+ }
