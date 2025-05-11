@@ -37,7 +37,8 @@
         }
 
         #page-1 .hero,
-        #page-3 .hero {
+        #page-3 .hero,
+        #page-5 .hero {
             background: linear-gradient(to right, #e3f2fd, #fce4ec);
         }
 
@@ -62,36 +63,28 @@
             max-width: 600px;
         }
 
-        #page-5 {
-            position: absolute;
-        }
-
         .flower {
             position: absolute;
+            top: 0;
             animation: flowerFall 2s ease-in forwards;
+            width: 50px;
+            height: 50px;
         }
-
 
         @keyframes flowerFall {
             0% {
-                transform: translate(0, 0) scale(1);
+                transform: translateY(0);
                 opacity: 1;
             }
 
             50% {
-                transform: translate(var(--x), -200px) scale(1.2);
+                transform: translateY(-200px);
             }
 
             100% {
-                transform: translate(var(--x), 100vh) scale(1);
+                transform: translateY(100vh);
                 opacity: 1;
             }
-        }
-
-        .flower {
-            animation: flowerFall 2s ease-in forwards;
-            position: absolute;
-            top: 0;
         }
     </style>
 </head>
@@ -102,6 +95,7 @@
             <span class="visually-hidden">Loading...</span>
         </div>
     </div>
+
     <div class="content" id="page-1">
         <div class="hero">
             <h1>Hello, Mama!</h1>
@@ -118,16 +112,17 @@
         </div>
     </div>
     <div class="content bg-dark" id="page-4">
-        <div class="hero d-flex flex-wrap" id="flower-parent">
-        </div>
+        <div class="hero d-flex flex-wrap" id="flower-parent"></div>
     </div>
 
-    <div id="content" id="page-5">
+    <div class="content" id="page-5">
         <div class="hero">
             <h1>Is that enough?</h1>
             <p>Well that's it! Happy Mother's Day!</p>
+            <i>From Rayyan and Azhan</i>
         </div>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(window).on('load', function () {
@@ -146,53 +141,42 @@
                                     let elem = document.createElement("img");
                                     elem.src = "flower.svg";
                                     elem.className = "flower";
+
                                     let x = getNonOverlappingX();
-                                    let y = getNonOverlappingy();
                                     elem.style.left = x + "px";
-                                    elem.style.top = y + "px";
+
+                                    elem.style.animationDuration = (1 + Math.random() * 2).toFixed(2) + "s";
+
                                     $("#flower-parent").append(elem);
-                                    $(elem).hide();
-                                    $(elem).fadeIn();
-                                    if (u == 99) {
+                                    $(elem).hide().fadeIn();
+
+                                    if (u === 99) {
                                         clearInterval(interval);
-                                        setTimeout(() => { alert("That's it bye!"); window.close() }, 3000);
+                                        setTimeout(() => {
+                                            $("#page-5").show();
+                                            $("#page-4").slideUp(1000);
+                                        }, 3000);
                                     }
                                     u++;
-                                }, 1);
-
+                                }, 30);
                             }, 2000);
                         }, 2000);
                     }, 2000);
                 }, 2000);
-
             });
         });
+
         let usedPositionsX = [];
-        let usedPositionsY = [];
 
-
-        function getNonOverlappingX(width = 500) {
-            let x;
-            let maxAttempts = 1000;
-            let attempts = 0;
+        function getNonOverlappingX(width = 60) {
+            let x, maxAttempts = 1000, attempts = 0;
             do {
-                x = Math.floor(Math.random() * (window.innerWidth * 0.99 - width));
+                x = Math.floor(Math.random() * (window.innerWidth - width));
                 attempts++;
             } while (usedPositionsX.some(pos => Math.abs(pos - x) < width + 10) && attempts < maxAttempts);
             usedPositionsX.push(x);
             return x;
-        } function getNonOverlappingy(height = 500) {
-            let y;
-            let maxAttempts = 1000;
-            let attempts = 0;
-            do {
-                y = Math.floor(Math.random() * (window.innerHeight * 0.99 - height));
-                attempts++;
-            } while (usedPositionsY.some(pos => Math.abs(pos - y) < height + 10) && attempts < maxAttempts);
-            usedPositionsY.push(y);
-            return y;
         }
-
     </script>
 </body>
 
